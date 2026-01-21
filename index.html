@@ -116,3 +116,76 @@ cd rsa-hand-demo
        Добавлен RSA от 21.01.2026           
 ```bash
 python rsa_demo.py
+    
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Учебный пример RSA | 21 января 2026</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+    h1, h2 { color: #2c3e50; }
+    code { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 6px; overflow-x: auto; }
+    .date { color: #7f8c8d; font-style: italic; margin-bottom: 24px; }
+    .success { color: #27ae60; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Учебный пример RSA-шифрования</h1>
+  <div class="date">📅 Дата: 21 января 2026 г.</div>
+
+  <p>Этот пример демонстрирует <strong>ручную реализацию алгоритма RSA</strong> на минимальных значениях для понимания принципа работы.</p>
+  
+  <blockquote>
+    ⚠️ <strong>Важно</strong>: Этот пример <strong>не безопасен</strong> и используется <strong>только в образовательных целях</strong>.<br>
+    В реальных системах модуль <code>n</code> — это число из <strong>600+ десятичных цифр</strong>.
+  </blockquote>
+
+  <h2>🔢 Расчёт параметров</h2>
+  <ol>
+    <li><strong>Простые числа</strong>: \( p = 3 \), \( q = 5 \)</li>
+    <li><strong>Модуль</strong>: \( n = p \cdot q = 3 \cdot 5 = 15 \)</li>
+    <li><strong>Функция Эйлера</strong>: \( \varphi(n) = (p - 1)(q - 1) = 2 \cdot 4 = 8 \)</li>
+    <li><strong>Открытая экспонента <code>e</code></strong>:<br>
+        Выбираем \( e = 3 \), так как:<br>
+        &nbsp;&nbsp;– \( 1 < e < \varphi(n) \)<br>
+        &nbsp;&nbsp;– \( \gcd(e, \var􏰀varphi(n)) = \gcd(3, 8) = 1 \) → ✅</li>
+    <li><strong>Закрытая экспонента <code>d</code></strong>:<br>
+        Находим \( d \) такое, что \( (e \cdot d) \bmod \varphi(n) = 1 \)<br>
+        \( (3 \cdot 3) \bmod 8 = 9 \bmod 8 = 1 \) → ✅<br>
+        ⇒ \( d = 3 \)</li>
+  </ol>
+
+  <h2>🔑 Ключи</h2>
+  <ul>
+    <li><strong>Открытый ключ</strong>: \( (n, e) = (15,\ 3) \)<br>
+        → Используется для <strong>шифрования</strong> (может быть общедоступным)</li>
+    <li><strong>Закрытый ключ</strong>: \( (n, d) = (15,\ 3) \)<br>
+        → Используется для <strong>расшифровки</strong> (должен храниться в секрете)</li>
+  </ul>
+  <p>💡 В этом учебном примере <code>e = d</code>, но в реальности они всегда разные.</p>
+
+  <h2>📨 Шифрование и расшифровка</h2>
+  <ul>
+    <li><strong>Сообщение</strong>: \( m = 2 \) (например, кодовое значение «анализ готов»)<br>
+        Условие: \( 0 < m < n \) → \( 2 < 15 \) → ✅</li>
+    <li><strong>Шифрование</strong>:<br>
+        \( C = m^e \bmod n = 2^3 \bmod 15 = 8 \)</li>
+    <li><strong>Расшифровка</strong>:<br>
+        \( m = C^d \bmod n = 8^3 \bmod 15 = 512 \bmod 15 = 2 \)</li>
+  </ul>
+  <p class="success">✅ Исходное сообщение восстановлено!</p>
+
+  <h2>🌐 Реальность</h2>
+  <p>В настоящих криптосистемах (например, TLS, PGP, SSH):</p>
+  <ul>
+    <li>\( p \) и \( q \) — случайные простые числа длиной <strong>1024–4096 бит</strong>,</li>
+    <li>\( n \) — имеет <strong>300–1200+ десятичных цифр</strong>,</li>
+    <li>\( e \) часто фиксировано (например, 65537),</li>
+    <li>\( d \) вычисляется с помощью расширенного алгоритма Евклида.</li>
+  </ul>
+  <p>Но <strong>логика остаётся той же</strong>, что и в этом примере.</p>
+</body>
+</html>
